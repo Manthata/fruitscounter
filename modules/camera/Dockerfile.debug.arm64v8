@@ -1,0 +1,15 @@
+FROM arm64v8/python:3.7-slim-buster
+
+ENV VIDEO_SOURCE="rtsp://192.168.1.233:554/live.sdp"
+ENV STAGE="dev"
+ENV IMAGE_PROCESSING_ENDPOINT="http://localhost:8000/classifier/image"
+
+
+WORKDIR /app
+
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+
+COPY app/ /app/
+
+CMD [ "python3", "-u", "main.py" ]

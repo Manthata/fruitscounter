@@ -1,0 +1,16 @@
+﻿FROM python:3.7-slim
+
+RUN /usr/local/bin/python -m pip install --upgrade pip &&\
+    pip install --no-cache-dir numpy tensorflow flask pillow \
+    mscviplib==2.200731.16
+
+COPY app /app
+
+# Expose the port
+EXPOSE 80
+
+# Set the working directory
+WORKDIR /app
+
+# Run the flask server for the endpoints
+CMD python -u app.py
